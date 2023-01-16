@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,6 +48,12 @@ class Task extends Model
 
 		return self::STATUS[$status]['class'];
 	
+	}
+
+	//日付をハイフン区切りからスラッシュ区切りに変更
+	public function getFormattedDueDateAttribute()
+	{
+		return Carbon::createFromFormat('Y-m-d', $this->attributes['due_date'])->format('Y/m/d');
 	}
 
 
